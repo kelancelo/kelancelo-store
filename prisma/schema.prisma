@@ -1,0 +1,78 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Customer {
+  id              String     @id
+  email           String     @unique
+  givenName       String
+  familyName      String?
+  houseAddress    String?
+  city            String?
+  stateOrProvince String?
+  postalCode      String?
+  country         String?
+  picture         String
+  orders          Order[]
+  cartItem        CartItem[]
+}
+
+model Product {
+  id          Int        @id @default(autoincrement())
+  name        String
+  description String
+  category    Category   @relation(fields: [categoryId], references: [id])
+  categoryId  String
+  price       Float
+  stock       Int
+  pictures    String[]
+  orders      Order[]
+  cart        CartItem[]
+}
+
+model Order {
+  id             Int          @id @default(autoincrement())
+  customer       Customer     @relation(fields: [customerId], references: [id])
+  customerId     String
+  product        Product      @relation(fields: [productId], references: [id])
+  productId      Int
+  shippingType   ShippingType @relation(fields: [shippingTypeId], references: [id])
+  shippingTypeId String
+  quantity       Int
+  dateOrdered    DateTime     @default(now())
+  status         String       @default("Preparing")
+}
+
+model CartItem {
+  customer   Customer @relation(fields: [customerId], references: [id])
+  customerId String
+  product    Product  @relation(fields: [productId], references: [id])
+  productId  Int
+  quantity   Int
+  dateAdded  DateTime @default(now())
+
+  @@id([customerId, productId])
+}
+
+model Category {
+  id          String    @id
+  name        String
+  description String
+  picture     String
+  products    Product[]
+}
+
+model ShippingType {
+  id     String  @id
+  name   String
+  cost   Float
+  orders Order[]
+}
