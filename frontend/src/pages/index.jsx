@@ -10,6 +10,10 @@ export default function Index() {
     const navigate = useNavigate()
 
     useEffect(() => {
+        document.title = 'Kelancelo store'
+    }, [])
+
+    useEffect(() => {
         async function fetchCategories() {
             const res = await fetch('/api/categories')
             if (res.ok) {

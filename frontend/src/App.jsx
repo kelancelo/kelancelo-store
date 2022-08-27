@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react'
 import { LoggedInUserContext, AlertContext, CartContext, OrdersContext, FetchedAllInitialDataContext, ProductsContext } from './contexts'
 import Alert from './components/alert'
 import Orders from './pages/orders'
+import PageNotFound from './pages/pageNotFound'
 
 
 // function RequireAuth({ children }) {
@@ -36,7 +37,7 @@ export default function App() {
   const [cartItems, setCartItems] = useState([])
   const [alert, setAlert] = useState({ open: false, message: '', severity: '' })
 
-
+  
   useEffect(() => {
     async function saveUsertoDB() {
       const customerData = user.given_name
@@ -79,7 +80,7 @@ export default function App() {
           const data = await res.json()
           setOrders(data)
         }
-        else if (res.status === 404) { console.log('no orders.') }
+        // else if (res.status === 404) { console.log('no orders.') }
       }
 
       async function fetchCartItems() {
@@ -88,7 +89,7 @@ export default function App() {
           const data = await res.json()
           setCartItems(data)
         }
-        else if (res.status === 404) { console.log('no items in cart.') }
+        // else if (res.status === 404) { console.log('no items in cart.') }
       }
 
       async function fetchAllInitialData() {
@@ -129,7 +130,7 @@ export default function App() {
                   <Route path='/products/:productId' element={<ProductPage />} />
                   <Route path='/orders' element={<Orders />} />
                   <Route path='/checkout' element={<Checkout />} />
-                  <Route path='*' element={<h1 className='text-center'>Page not found.</h1>} />
+                  <Route path='*' element={<PageNotFound />} />
                 </Routes>
               </AlertContext.Provider>
             </CartContext.Provider>

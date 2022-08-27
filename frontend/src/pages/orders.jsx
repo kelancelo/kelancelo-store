@@ -1,9 +1,13 @@
-import { useContext } from "react"
+import { useContext, useEffect } from "react"
 import OrderItem from "../components/orderItem"
 import { OrdersContext } from "../contexts"
 
 export default function Orders() {
     const { orders } = useContext(OrdersContext)
+
+    useEffect(() => {
+        document.title = "Orders"
+    }, [])
 
     return (
         <>

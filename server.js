@@ -3,9 +3,16 @@ const express = require('express')
 const app = express()
 const { PrismaClient } = require('@prisma/client')
 const prisma = new PrismaClient()
+const path = require('path')
 
+
+//MIDDLEWARES
 app.use(express.static('frontend/dist'))
 app.use(express.json())
+//************************************************************/
+
+
+//ROUTES
 
 //CUSTOMERS
 app.post('/api/customers', async (req, res) => {
@@ -31,7 +38,7 @@ app.patch('/api/customers/:customerId', async (req, res) => {
     })
     res.send(updatedCustomer)
 })
-////////////
+//*************************************************************/
 
 //ORDERS
 app.get('/api/orders/:customerId', async (req, res) => {
@@ -67,7 +74,7 @@ app.post('/api/orders', async (req, res) => {
         res.status(201).send(order)
     }
 })
-/////////////
+//************************************************************/
 
 //CATEGORIES
 app.get('/api/categories', async (req, res) => {
@@ -76,7 +83,7 @@ app.get('/api/categories', async (req, res) => {
     else { res.sendStatus(404) }
 
 })
-////////////
+//************************************************************/
 
 //PRODUCTS
 app.get('/api/products', async (req, res) => {
@@ -93,7 +100,7 @@ app.get('/api/products/:productId', async (req, res) => {
     else { res.sendStatus(404) }
 
 })
-////////////
+//************************************************************/
 
 //CART ITEMS
 app.get('/api/cartItems/:customerId', async (req, res) => {
@@ -179,7 +186,14 @@ app.delete('/api/cartItems/:customerId/:productId', async (req, res) => {
     if (deletedItem) { res.sendStatus(200) }
     else { res.sendStatus(500) }
 })
-///////////////////
+//************************************************************/
+
+//CATCH ALL
+app.all('/*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'frontend', 'dist', 'index.html'))
+})
+//************************************************************/
+
 
 const port = process.env.PORT || 5000
 app.listen(port, () => console.log(`Server listening on port ${port}`))

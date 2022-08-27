@@ -49,7 +49,7 @@ export default function AddressForm() {
     }
 
     return (
-        <form onSubmit={updateAddress}>
+        <form onSubmit={updateAddress} style={{ maxWidth: '30rem', marginInline: 'auto' }}>
             <div className="mb-3">
                 <label htmlFor="houseAddress" className="form-label">
                     Apartment, unit, suite, or floor #

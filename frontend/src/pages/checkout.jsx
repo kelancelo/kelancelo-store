@@ -35,6 +35,10 @@ export default function Checkout() {
 
 
     useEffect(() => {
+        document.title = 'Checkout'
+    }, [])
+
+    useEffect(() => {
         if (fetchedAllInitialData && (!loggedInUser || !cartItems.length) && !orderComplete) {
             navigate('/')
         }
@@ -135,7 +139,7 @@ export default function Checkout() {
         )
         else if (!loggedInUser.country) return (
             <>
-                <h2 className="fw-bold mb-4 text-center">Enter your address to proceed to checkout.</h2>
+                <h2 className="fw-bold mb-5 text-center">Enter your address to proceed to checkout.</h2>
                 <AddressForm />
             </>
         )
