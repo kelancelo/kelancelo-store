@@ -1,17 +1,14 @@
 # Kelancelo store
-Kelancelo store is an e-commerce site inspired by my favorite guitarist Synyster Gates. It uses paypal to process payments.
+#### Video Demo:  https://www.youtube.com/watch?v=yyQz2WFz5aU
+#### Description: Kelancelo store is an e-commerce site inspired by my favorite guitarist Synyster Gates. It uses paypal to process payments.
 
 ## Tech stack
 These are the technologies used to build this project.
-* Auth0
 * Bootstrap
 * Express
-* Heroku
 * Node
-* Prisma
 * PostgreSQL
 * React
-* Sass
 
 ## ERD
 ![kelancelo-store-ERD](https://user-images.githubusercontent.com/33194805/187023253-e574c476-0da8-4ff7-a6d9-4b47273b52df.png)
