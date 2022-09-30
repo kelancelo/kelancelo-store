@@ -3,6 +3,11 @@ import { useEffect, useRef } from "react"
 export default function CartItem(props) {
     const quantityRef = useRef(null)
 
+    useEffect(() => {
+        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+        const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+    }, [])
+
     return (
         <div
             className="cart-item"
@@ -43,12 +48,12 @@ export default function CartItem(props) {
                 >
                     <input
                         className="form-control-sm text-center border border-dark"
+                        data-bs-toggle="tooltip"
+                        data-bs-placement="top"
+                        data-bs-title="You can change the quantity by typing the new value then pressing enter."
                         type="number"
                         defaultValue={props.item.quantity}
                         ref={quantityRef}
-                        onBlur={(e) => {
-                            props.updateItem(e, props.item.customerId, props.item.productId, quantityRef.current.value)
-                        }}
                         style={{ width: '100%' }}
                     />
                 </form>

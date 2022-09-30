@@ -12,22 +12,6 @@ import Orders from './pages/orders'
 import PageNotFound from './pages/pageNotFound'
 
 
-// function RequireAuth({ children }) {
-//   const { isLoading, isAuthenticated } = useAuth0();
-//   const location = useLocation();
-
-//   if (!isLoading && !isAuthenticated) {
-//     // Redirect them to the /login page, but save the current location they were
-//     // trying to go to when they were redirected. This allows us to send them
-//     // along to that page after they login, which is a nicer user experience
-//     // than dropping them off on the home page.
-//     return <Navigate to="/login" state={{ from: location }} replace />;
-//   }
-
-//   return children;
-// }
-
-
 export default function App() {
   const { isLoading, isAuthenticated, user } = useAuth0()
   const [loggedInUser, setLoggedInUser] = useState()
